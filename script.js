@@ -28,10 +28,32 @@ class game{
             this.deck[i] = this.deck[j];
             this.deck[j] = k;
         }
-        console.log(this.deck)
+        console.log(this.deck);
     }
+
+    setUp(){
+        let space = document.getElementsByClassName('col');
+        
+        for(let i=1; i<=space.length; i++){
+            let x = 'c'+i;
+            let row = document.createElement('tr');
+            for(let j=1; j<=x[1];j++){
+                    var td = document.createElement('td');
+                    for(let k=0; k<=space.length; k++){
+                        if(j==x[1]){
+                            td.innerHTML='1'
+                        }else{
+                            td.innerHTML='0'; 
+                        }
+                        row.appendChild(td)
+                        space[i-1].appendChild(row);
+                    }
+            }
+            console.log(x);
+        }
+    console.log(space)}
 }
 
 let t1 = new game(cards,1);
 
-t1.shuffle()
+t1.setUp()
