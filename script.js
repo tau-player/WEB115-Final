@@ -42,18 +42,19 @@ class game{
             this.img.src=this.deck[i];
             this.td.appendChild(this.img);
             this.up=true;
-        }else{
+        }else if(j==false){
             this.img.src='./cards/cardback.png';
             this.td.appendChild(this.img);
             this.up=false;
-            this.cardVals()
+            this.cardDown()
         }
     }
-    cardVals(){
+    cardDown(){
         this.td.id='Down'
-        for(i=6; i<=21; i++){
+        for(let i=7; i<=27; i++){
             this.cards.push(this.deck[i])
         }
+        console.log(this.cards)
     }
 
     setUp(){
@@ -68,7 +69,7 @@ class game{
                         if(j==this.x[1]){
                             this.upBack(i-1,true)
                         }else{
-                            this.upBack(0)
+                            this.upBack(0,false)
                         }
                         this.row.appendChild(this.td)
                         space[i-1].appendChild(this.row);
@@ -80,7 +81,8 @@ class game{
     }
 
     start(){
-        console.log(this.td)
+        this.shuffle();
+        this.setUp();
     }
 
 
@@ -89,5 +91,4 @@ class game{
 }
 
 let t1 = new game(1);
-t1.shuffle()
-t1.setUp()
+t1.start()
