@@ -21,6 +21,8 @@ class game{
         this.row
         this.x
         this.up
+        this.card
+        this.cards=[]
     }
 
     shuffle(){
@@ -35,8 +37,8 @@ class game{
         console.log(this.deck);
     }
 
-    upBack(i){
-        if(i!=0){
+    upBack(i,j){
+        if(j==true){
             this.img.src=this.deck[i];
             this.td.appendChild(this.img);
             this.up=true;
@@ -44,10 +46,14 @@ class game{
             this.img.src='./cards/cardback.png';
             this.td.appendChild(this.img);
             this.up=false;
+            this.cardVals()
         }
     }
     cardVals(){
-        
+        this.td.id='Down'
+        for(i=6; i<=21; i++){
+            this.cards.push(this.deck[i])
+        }
     }
 
     setUp(){
@@ -60,7 +66,7 @@ class game{
                     this.img = document.createElement('img');
                     for(let k=0; k<=space.length; k++){
                         if(j==this.x[1]){
-                            this.upBack(i)
+                            this.upBack(i-1,true)
                         }else{
                             this.upBack(0)
                         }
