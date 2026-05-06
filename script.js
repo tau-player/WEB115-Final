@@ -7,20 +7,24 @@ let cards=[];
 
 for(let i=0; i<4; i++){
     for(let j=0; j<13; j++){
-        cards.push(ranks[j]+'_'+suits[i]+'.png')
+        cards.push('./cards/'+ranks[j]+'_'+suits[i]+'.png')
     }
 }
 
-console.log(cards)
+//console.log(cards)
 class game{
-    constructor(cards, size){
-        this.cards=cards
+    constructor(size){
         this.deck=[];
         this.size=size;
+        this.td
+        this.img
+        this.row
+        this.x
+        this.up
     }
 
     shuffle(){
-        this.deck.push(this.cards)
+        this.deck=cards
         
         for(let i = this.deck.length -1; i>0; i--){
             let j = Math.floor(Math.random()*(i+1));
@@ -31,29 +35,53 @@ class game{
         console.log(this.deck);
     }
 
-    setUp(){
-        let space = document.getElementsByClassName('col');
+    upBack(i){
+        if(i!=0){
+            this.img.src=this.deck[i];
+            this.td.appendChild(this.img);
+            this.up=true;
+        }else{
+            this.img.src='./cards/cardback.png';
+            this.td.appendChild(this.img);
+            this.up=false;
+        }
+    }
+    cardVals(){
         
+    }
+
+    setUp(){
+        var space = document.getElementsByClassName('col');
         for(let i=1; i<=space.length; i++){
-            let x = 'c'+i;
-            let row = document.createElement('tr');
-            for(let j=1; j<=x[1];j++){
-                    var td = document.createElement('td');
+            this.x = 'c'+i;
+            this.row = document.createElement('tr');
+            for(let j=1; j<=this.x[1];j++){
+                    this.td = document.createElement('td');
+                    this.img = document.createElement('img');
                     for(let k=0; k<=space.length; k++){
-                        if(j==x[1]){
-                            td.innerHTML='1'
+                        if(j==this.x[1]){
+                            this.upBack(i)
                         }else{
-                            td.innerHTML='0'; 
+                            this.upBack(0)
                         }
-                        row.appendChild(td)
-                        space[i-1].appendChild(row);
+                        this.row.appendChild(this.td)
+                        space[i-1].appendChild(this.row);
                     }
             }
-            console.log(x);
+            //console.log(this.x);
         }
-    console.log(space)}
+    //console.log(space)
+    }
+
+    start(){
+        console.log(this.td)
+    }
+
+
+
+    
 }
 
-let t1 = new game(cards,1);
-
+let t1 = new game(1);
+t1.shuffle()
 t1.setUp()
