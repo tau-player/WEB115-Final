@@ -1,6 +1,4 @@
 const div=document.getElementById("playSpace");
-let p = document.createElement('p'); // placeholder test element
-div.appendChild(p); // placeholder test element
 const suits=["clubs", "diamonds", "hearts", "spades"];
 const ranks=["2","3","4","5","6","7","8","9","10","jack","queen","king","ace"];
 let cards=[];
@@ -42,6 +40,7 @@ class game{
             this.img.src=this.deck[i];
             this.td.appendChild(this.img);
             this.up=true;
+            this.td.id='Up'
         }else if(j==false){
             this.img.src='./cards/cardback.png';
             this.td.appendChild(this.img);
@@ -49,12 +48,25 @@ class game{
             this.cardDown()
         }
     }
+
     cardDown(){
         this.td.id='Down'
+        this.img.className='card';
         for(let i=7; i<=27; i++){
             this.cards.push(this.deck[i])
         }
-        console.log(this.cards)
+        let s = new Set(this.cards)
+        this.cards = [...s]
+
+
+        //console.log(this.cards)
+    }
+
+    eventListeners(){
+        let cD = document.getElementsByClassName('card')
+        for(let i=0; i<cD.length; i++){
+            cD[i].addEventListener("click",console.log('i'))
+        }
     }
 
     setUp(){
@@ -83,6 +95,7 @@ class game{
     start(){
         this.shuffle();
         this.setUp();
+        this.eventListeners()
     }
 
 
